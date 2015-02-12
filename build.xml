@@ -165,7 +165,7 @@
 		<if>
 			<available file="xmllint" filepath="${env.PATH}" />
 			<then>
-				<exec executable="xmllint" output="${target-folder}/${plugin-folder}/manifest.xml" failonerror="true" error="/dev/stdout">
+				<exec executable="xmllint" output="${target-folder}/${plugin-folder}/manifest.xml" failonerror="true">
 					<arg value="--valid"/>
 					<arg value="--path"/>
 					<arg value="${server-folder}"/>
