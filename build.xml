@@ -3,6 +3,7 @@
 	<property name="root-folder" value="${basedir}/../../"/>
 	<property name="tools-folder" value="${root-folder}/tools/"/>
 	<property name="target-folder" value="${root-folder}/deploy/plugins"/>
+	<property name="server-folder" value="${root-folder}/server"/>
 
 	<import file="${tools-folder}/antutil.xml"/>
 
@@ -19,7 +20,6 @@
 	</taskdef>
 
 	<!-- Determine plugin name -->
-	<var name="plugin" unset="true"/>
 	<basename file="${basedir}" property="plugin"/>
 
 	<!-- The Plugin distribution files -->
@@ -168,7 +168,7 @@
 				<exec executable="xmllint" output="${target-folder}/${plugin-folder}/manifest.xml" failonerror="true" error="/dev/stdout">
 					<arg value="--valid"/>
 					<arg value="--path"/>
-					<arg value="${root-folder}/server"/>
+					<arg value="${server-folder}"/>
 					<arg value="manifest.xml"/>
 				</exec>
 			</then>
