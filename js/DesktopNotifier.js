@@ -38,14 +38,11 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotifier = Ext.extend(Zarafa.core.
 		Zarafa.plugins.desktopnotifications.js.DesktopNotification.notify(title, {
 			tag : category,
 			body : message,
-			icon : 'plugins/desktopnotifications/resources/favicon.ico'
+			icon : 'plugins/desktopnotifications/resources/popup.ico'
 		}, {
 			click : function() {
 				// focus window which generated this notification
 				window.focus();
-
-				// cancel notification
-				this.cancel();
 			}
 		});
 
