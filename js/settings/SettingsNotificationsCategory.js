@@ -20,6 +20,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsCategory = 
 			title : _('Desktop Notifications'),
 			categoryIndex : 9996,
 			xtype : 'zarafa.settingsdesktopnotificationscategory',
+			iconCls : 'icon_desktopnotifications_settings',
 			items : [{
 				xtype : 'zarafa.settingsdesktopnotificationswidget',
 				settingsContext : config.settingsContext
