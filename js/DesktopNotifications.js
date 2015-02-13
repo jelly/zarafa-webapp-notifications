@@ -119,6 +119,12 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 				});
 			}
 
+			notification.addEventListener("show", function () {
+				setTimeout(function () {
+					notification.close();
+				}, 5000);
+			});
+
 			if(handlers) {
 				for(var key in handlers) {
 					notification['on' + key] = handlers[key];
