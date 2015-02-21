@@ -80,6 +80,42 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				handler : this.onChangeCheckbox,
 				scope : this,
 				ref : '../reminderNotificationsCheck'
+			}, {
+				xtype: 'zarafa.compositefield',
+				plugins: [ 'zarafa.splitfieldlabeler' ],
+				fieldLabel: '{A} Autohide desktop notification after second(s) {B}',
+				labelWidth: 300,
+				combineErrors: false,
+				items: [{
+					xtype : 'checkbox',
+					labelSplitter: '{A}',
+					name : 'zarafa/v1/plugins/desktopnotifications/autohide_enable',
+					ref : '../../autoHideBox',
+					boxLabel : '',
+					hideLabel : true,
+					checked : true,
+					listeners : {
+						change : this.onFieldChange,
+						scope : this
+					}
+				}, {
+					xtype: 'zarafa.spinnerfield',
+					labelSplitter: '{B}',
+					vtype: 'naturalInteger',
+					name : 'zarafa/v1/plugins/desktopnotifications/autohide_time',
+					ref : '../../autoHideTimeSpinner',
+					incrementValue: 1,
+					defaultValue: 1,
+					minValue : 1,
+					allowBlank: false,
+					allowDecimals: false,
+					allowNegative: false,
+					listeners: {
+						change: this.onFieldChange,
+						scope: this
+					},
+					plugins: ['zarafa.numberspinner']
+				}]
 			}]
 		}];
 	},
@@ -147,6 +183,54 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 
 		var reminderChecked = (this.model.get(this.reminderNotificationsCheck.name) === 'desktopnotifier');
 		this.reminderNotificationsCheck.setValue(reminderChecked);
+
+		// Set values in autoSave checkbox and textfield.
+		var enabled = settingsModel.get(this.autoHideBox.name);
+
+		this.autoHideBox.setValue(enabled);
+
+		var spinnerValue = this.model.get(this.autoHideTimeSpinner.name);
+		if(spinnerValue === 0 || !Ext.isDefined(spinnerValue))  {
+			this.autoHideTimeSpinner.setValue(5); // Default 5 minutes
+		} else {
+			this.autoHideTimeSpinner.setValue(spinnerValue);
+		}
+	},
+
+	/**
+	 * Called by the {@link Zarafa.settings.ui.SettingsCategory Category} when
+	 * it has been called with {@link zarafa.settings.ui.SettingsCategory#updateSettings}.
+	 * This is used to update the settings from the UI into the {@link Zarafa.settings.SettingsModel settings model}.
+	 * @param {Zarafa.settings.SettingsModel} settingsModel The settings to update
+	 */
+	updateSettings : function(settingsModel)
+	{
+		var spinnerValue = this.autoHideTimeSpinner.getValue();
+		if(spinnerValue === 0 || !Ext.isDefined(spinnerValue))  {
+			spinnerValue = 1;
+		}
+
+		settingsModel.beginEdit();
+		settingsModel.set(this.autoHideTimeSpinner.name, spinnerValue);
+		settingsModel.endEdit();
+	},
+
+	/**
+	 * Event handler which is called when one of the textfields has been changed.
+	 * This will apply the new value to the settings.
+	 * @param {Ext.form.Field} field The field which has fired the event
+	 * @param {String} value The new value
+	 * @private
+	 */
+	onFieldChange : function(field, value)
+	{
+		if (this.model) {
+			// FIXME: The settings model should be able to detect if
+			// a change was applied
+			if (this.model.get(field.name) !== value) {
+				this.model.set(field.name, value);
+			}
+		}
 	}
 });
 

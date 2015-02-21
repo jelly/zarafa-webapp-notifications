@@ -119,11 +119,14 @@ Zarafa.plugins.desktopnotifications.js.DesktopNotification = (function() {
 				});
 			}
 
-			notification.addEventListener("show", function () {
-				setTimeout(function () {
-					notification.close();
-				}, 5000);
-			});
+			if(container.getSettingsModel().get('zarafa/v1/plugins/desktopnotifications/autohide_enable')) {
+				var sleepTime = container.getSettingsModel().get('zarafa/v1/plugins/desktopnotifications/autohide_time') * 1000;
+				notification.addEventListener("show", function () {
+					setTimeout(function () {
+						notification.close();
+					}, sleepTime);
+				});
+			}
 
 			if(handlers) {
 				for(var key in handlers) {
