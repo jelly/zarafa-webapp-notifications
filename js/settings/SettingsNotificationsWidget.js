@@ -56,7 +56,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 			items : [{
 				xtype : 'displayfield',
 				hideLabel : true,
-				value : _('For enabling desktop notifications we need permissions from browser.')
+				value : _('For enabling desktop notifications we need permissions from the browser. (Only Chrome and Firefox are supported) ')
 			}, {
 				xtype : 'button',
 				width : 200,
