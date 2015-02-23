@@ -52,12 +52,10 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 	{
 		return [{
 			xtype : 'form',
-			defaults : {
-				hideLabel : true
-			},
 			border : false,
 			items : [{
 				xtype : 'displayfield',
+				hideLabel : true,
 				value : _('For enabling desktop notifications we need permissions from browser.')
 			}, {
 				xtype : 'button',
@@ -65,6 +63,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				text : _('Request Permissions'),
 				handler : this.requestPermission,
 				scope : this,
+				hideLabel : true,
 				ref : '../requestPermissionBtn'
 			}, {
 				xtype : 'checkbox',
@@ -72,6 +71,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				name : 'zarafa/v1/main/notifier/info/newmail/value',
 				handler : this.onChangeCheckbox,
 				scope : this,
+				hideLabel : true,
 				ref : '../newMailNotificationsCheck'
 			}, {
 				xtype : 'checkbox',
@@ -79,11 +79,12 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				name : 'zarafa/v1/main/notifier/info/reminder/value',
 				handler : this.onChangeCheckbox,
 				scope : this,
+				hideLabel : true,
 				ref : '../reminderNotificationsCheck'
 			}, {
 				xtype: 'zarafa.compositefield',
 				plugins: [ 'zarafa.splitfieldlabeler' ],
-				fieldLabel: '{A} Autohide desktop notification after second(s) {B}',
+				fieldLabel: _('{A} Autohide desktop notification after second(s) {B}'),
 				labelWidth: 300,
 				combineErrors: false,
 				items: [{
