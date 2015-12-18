@@ -53,6 +53,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 		return [{
 			xtype : 'form',
 			border : false,
+			autoHeight: true,
 			items : [{
 				xtype : 'displayfield',
 				hideLabel : true,
@@ -64,7 +65,8 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 				handler : this.requestPermission,
 				scope : this,
 				hideLabel : true,
-				ref : '../requestPermissionBtn'
+				ref : '../requestPermissionBtn',
+				style: 'margin-bottom: 6px;'
 			}, {
 				xtype : 'checkbox',
 				boxLabel : _('Enable desktop notifications for new mail'),
@@ -95,6 +97,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 					boxLabel : '',
 					hideLabel : true,
 					checked : true,
+					style: 'margin-top: 4px',
 					listeners : {
 						change : this.onFieldChange,
 						scope : this
@@ -108,6 +111,7 @@ Zarafa.plugins.desktopnotifications.js.settings.SettingsNotificationsWidget = Ex
 					incrementValue: 1,
 					defaultValue: 1,
 					minValue : 1,
+					width: 55,
 					allowBlank: false,
 					allowDecimals: false,
 					allowNegative: false,
